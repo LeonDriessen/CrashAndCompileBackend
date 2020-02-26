@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Header } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -6,8 +6,8 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  async getQuestions() {
-    const Questions = await this.appService.getQuestions();
-    return Questions;
+  @Header('Content-Type', 'text/html')
+  getHello(): { name: string } {
+    return { name: 'Max' };
   }
 }

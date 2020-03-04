@@ -31,7 +31,7 @@ describe('Question', () => {
   describe('Find questions', () => {
     it('should return an array of questions', async () => {
       const result = await questionModel.find().exec();
-      expect(result.getLength > 1);
+      expect(result.getLength >= 1);
     });
 
     it('should return the question with right questionid', async () => {
@@ -72,10 +72,8 @@ describe('Question', () => {
     it('should delete a question', async () => {
       const mockQuestion = new questionModel(questionData);
       const newId = mockQuestion._id;
-
       await mockQuestion.save();
       await questionModel.deleteOne({ _id: newId }).exec();
-
       const result = await questionModel.findOne(newId).exec();
 
       expect(result).toBe(null);
@@ -84,10 +82,8 @@ describe('Question', () => {
     it('should delete a question and recognize if it is not there', async () => {
       const mockQuestion = new questionModel(questionData);
       const newId = mockQuestion._id;
-
       await mockQuestion.save();
       await questionModel.deleteOne({ _id: newId }).exec();
-
       const resultDelete = await questionModel.deleteOne({ _id: newId }).exec();
       const resultFind = await questionModel.findOne(newId).exec();
 

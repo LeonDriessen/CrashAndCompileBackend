@@ -14,14 +14,16 @@ paths:
   /question:
     get:
       summary: Returns all question entries in the database.
+      tags:
+        - Question
       produces:
         - application/json
       responses:
         '200':
-          description: ok.
+          description: A list of all questions in the database.
           schema:
-            type: array
-            items: string
+            items:
+              type: array
             properties:
               result:
                 type: object
@@ -36,3 +38,104 @@ paths:
                     type: integer
         '400':
           description: Bad request
+    post:
+      tags:
+        - Question
+      summary: Sends a question to the server to add to the database
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: question
+          description: The question needed to be answered.
+          schema:
+            type: object
+            required:
+              - question
+              - answer
+              - points
+            properties:
+              question:
+                type: string
+              answer:
+                type: string
+              points:
+                type: integer
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: bad request
+  /question/{id}:
+    get:
+      summary: Retreives question by ID
+      tags:
+        - Question
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the question.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The question with the given ID.
+          schema:
+            items:
+              type: array
+            properties:
+              result:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  question:
+                    type: string
+                  answer:
+                    type: string
+                  points:
+                    type: integer
+        '400':
+          description: Bad request
+    delete:
+      summary: deletes a question by ID
+      tags:
+        - Question
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the question to be deleted.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: bad request
+    patch:
+      summary: Changes a question given its ID.
+      tags:
+        - Question
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the question to be changed.
+          required: true
+          type: string
+        - in: body
+          name: question
+          description: The properties that need to change.
+          schema:
+            type: object
+            properties:
+              question:
+                type: string
+              answer:
+                type: string
+              points:
+                type: integer
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: bad request

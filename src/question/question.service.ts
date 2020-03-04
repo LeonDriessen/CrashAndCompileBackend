@@ -17,9 +17,11 @@ export class QuestionService {
       question: quest.question,
       answer: quest.answer,
       points: quest.points,
+      __v: quest.__v,
+
     }));
   }
-  async insertQuestion(question: string, answer: string, points: number) {
+  async insertQuestion( question: string, answer: string, points: number) {
     const newQuestion = new this.questionModel({
       question,
       answer,
@@ -36,10 +38,11 @@ export class QuestionService {
       question: question.question,
       answer: question.answer,
       points: question.points,
+      __v: question.__v,
     };
   }
 
-  async deleteProduct(questionId: string) {
+  async deleteQuestion(questionId: string) {
     const result = await this.questionModel
       .deleteOne({ _id: questionId })
       .exec();

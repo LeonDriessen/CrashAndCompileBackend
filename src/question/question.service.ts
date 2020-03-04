@@ -18,10 +18,9 @@ export class QuestionService {
       answer: quest.answer,
       points: quest.points,
       __v: quest.__v,
-
     }));
   }
-  async insertQuestion( question: string, answer: string, points: number) {
+  async insertQuestion(question: string, answer: string, points: number) {
     const newQuestion = new this.questionModel({
       question,
       answer,
@@ -67,7 +66,7 @@ export class QuestionService {
     if (points) {
       updatedQuestion.points = points;
     }
-    updatedQuestion.save();
+    await updatedQuestion.save();
   }
 
   private async findQuestion(id: string): Promise<Question> {

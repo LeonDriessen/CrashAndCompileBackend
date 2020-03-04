@@ -1,0 +1,38 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Crash & Compile API
+host: localhost:8080
+basePath: /
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /question:
+    get:
+      summary: Returns all question entries in the database.
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ok.
+          schema:
+            type: array
+            items: string
+            properties:
+              result:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  question:
+                    type: string
+                  answer:
+                    type: string
+                  points:
+                    type: integer
+        '400':
+          description: Bad request

@@ -39,12 +39,12 @@ export class QuestionController {
     @Body('answer') bodAnswer: string,
     @Body('points') bodPoints: number,
   ) {
-    const generatedId = await this.questionService.insertQuestion(
+    const generatedQuestion = await this.questionService.insertQuestion(
       bodQuestion,
       bodAnswer,
       bodPoints,
     );
-    return { id: generatedId };
+    return { id: generatedQuestion };
   }
 
   /* Deletes a question given an id
@@ -52,7 +52,7 @@ export class QuestionController {
    */
   @Delete(':id')
   async deleteQuestion(@Param('id') questId: string) {
-    await this.questionService.deleteProduct(questId);
+    await this.questionService.deleteQuestion(questId);
     return null;
   }
 

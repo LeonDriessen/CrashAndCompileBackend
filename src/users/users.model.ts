@@ -1,20 +1,29 @@
 import * as mongoose from 'mongoose';
+import { Binary } from 'mongodb';
 const mong = require('mongoose');
-const bcrypt = require('bcrypt');
+var encrypt = require('mongoose-bcrypt');
 
-export const QuestionSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+export const UsersSchema = new mongoose.Schema({
+  username: { type: String, required: true },
   role: { type: String, required: true },
   password: { type: String, required: true },
 });
 
-export interface Question extends mongoose.Document {
+//var encKey = process.env.SOME_32BYTE_BASE64_STRING;
+
+//UsersSchema.plugin(encrypt);
+
+export interface User extends mongoose.Document {
   id: string;
-  name: string;
+  username: string;
   role: string;
-  password: number;
+  password: string;
 }
 
-const questionModel = new mong.model('Question', QuestionSchema);
+const userModel = new mong.model('User', UsersSchema);
 
-module.exports = questionModel;
+module.exports = userModel;
+//{
+// userModel: userModel,
+//UsersSchema: UsersSchema,
+//};

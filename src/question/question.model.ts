@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-const mong  = require('mongoose');
+const mong = require('mongoose');
 
 export const QuestionSchema = new mongoose.Schema({
   question: { type: String, required: true },
@@ -14,6 +14,6 @@ export interface Question extends mongoose.Document {
   points: number;
 }
 
-const questionModel = new mong.model('Question',QuestionSchema);
+const questionModel = new mong.model('Question', QuestionSchema);
 
-module.exports = questionModel
+module.exports = questionModel;

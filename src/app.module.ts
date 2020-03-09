@@ -13,7 +13,6 @@ import { AuthModule } from './auth/auth.module';
       'mongodb+srv://dbUser:5xay1gmDvwdyCfXz@cluster0-zuzs1.azure.mongodb.net/questions-test?retryWrites=true&w=majority',
     ),
     QuestionModule,
-    UsersModule,
     AuthModule,
   ],
   controllers: [AppController],
